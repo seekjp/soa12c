@@ -8,7 +8,7 @@ pipeline {
   stages {
     stage('Initialize') {
       steps {
-        bat 'echo Hello'
+        bat 'echo "Hello Jp!"'
       }
     }
   }

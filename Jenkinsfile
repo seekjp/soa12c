@@ -21,10 +21,11 @@ pipeline {
       }
     }
 	stage('Deploy') {
-		steps {
+      steps {
         dir(path: 'SOA12cPOCApp') {
           bat 'mvn pre-integration-test'
         }
+      }
     }	
   }
 }

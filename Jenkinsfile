@@ -23,9 +23,7 @@ pipeline {
 	stage('Deploy') {
       steps {
         bat 'cd SOA12cPOCApp'
-      }		
-      steps {
-        bat 'mvn pre-integration-test'
+	bat 'mvn pre-integration-test'      
       }
     }	
   }

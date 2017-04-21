@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="windows-1252"?>
+<!-- edited with XMLSpy v2008 sp1 (http://www.altova.com) by SCHNEIDER NATIONAL (SCHNEIDER NATIONAL) -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://xmlns.schneider.com/EnterpriseObjects/Core/Common/V1" targetNamespace="http://xmlns.schneider.com/EnterpriseObjects/Core/Common/V1" elementFormDefault="qualified">
+
+<!-- ==================================== -->
+<!-- =============  SNIHeader =========== -->
+<!-- ==================================== -->
+	<xsd:complexType name="SNIHeaderType">
+		<xsd:sequence>
+			<xsd:element name="MessageID" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>UUID Generated for every Message  that enters SOA</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="MessageName" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>Name of the Message Should Refer to the Schema Element that goes into the WSDL Message. Ideally its a good idea to have the ObjectName And OperationName Available in the Message Name. eg: CreateCustomerMessage</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="BusinessKey" type="xsd:string" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Contains Optional Business Key If any involved in the message. Used for Univer Logging the Business keys available in the Message. Sensitive information that needs to be secured must not be part of the Header. As most part of the Header will be used in logging. </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="SessionID" type="xsd:string" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Populate User Session ID or Batch ID when Operating on batches of messages created in a flow </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="CreatedDateTime" type="xsd:dateTime">
+				<xsd:annotation>
+					<xsd:documentation>Time Stamp Information at the time of Creation of the Message</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="RequestMessageID" type="xsd:string" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Used to Correlate the Response Message with the Request Message ID. Can be used in place where buildin Request Response Correlation is not available</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="Sender" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Contains Information Regarding the Orginator of the Message if used in Service Context. Sender of the Message if used in Transportation Context.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="Target" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Contains Information Identifying the Target Service for the Message.  The Routing Service that acts on it decides to use or override theEndpoint URI available in the Message </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="HeaderExtension" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+     <xsd:element name="SNIHeader" type="SNIHeaderType"/>
+
+<!-- =============  Sender =========== -->
+	<xsd:complexType name="SenderType">
+		<xsd:sequence>
+			<xsd:element name="Name" type="xsd:string" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>ServiceName,ComponentName etc...</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ApplicationName" type="xsd:string" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>ApplicationCode and Domain  Name combination eg: ebizhr</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="HostName" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="InstanceID" type="xsd:string" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Process Instance ID that created the Message. </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="UserID" type="xsd:string" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Application Generating the Message can use this element to populate the user  or operator identifier under whose context the message is created</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="Sender" type="SenderType"/>
+
+<!-- =============  Target =========== -->
+	<xsd:complexType name="TargetType">
+		<xsd:sequence>
+			<xsd:element name="Name" type="xsd:string" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Name of the Target Service, Component etc</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ApplicationName" type="xsd:string" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Name of the Target Application along with their domain key. eg: Ebizhr</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="EndPointURI" type="xsd:string" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>The EndPoint URI of the service to which the Message needs to be routed</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="Target" type="TargetType"/>
+
+<!-- =============  HeaderExtension =========== -->
+	<xsd:complexType name="HeaderExtensionType">
+		<xsd:annotation>
+			<xsd:documentation>Contains the Name value Pairs of Additional Header Information</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="Value" type="KeyValueType" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation>Name value Pair for Additional Header Information </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+<!-- =============  KeyValue =========== -->
+	<xsd:complexType name="KeyValueType">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="Name" type="xsd:string"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:element name="HeaderExtension" type="HeaderExtensionType"/>
+
+
+<!-- ==================================== -->
+<!-- =============  SNIFault =========== -->
+<!-- ==================================== -->
+	<xsd:complexType name="SNIFaultType">
+		<xsd:sequence>
+			<xsd:element ref="FaultContext"/>
+			<xsd:element ref="FaultNotification"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="SNIFault" type="SNIFaultType"/>
+
+<!-- =============  FaultContextType =========== -->
+	<xsd:complexType name="FaultContextType">
+		<xsd:sequence>
+			<xsd:element name="MessageName" type="xsd:string" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Contains Message Name from SNIHeader. Maps to the Method Name component in the Enterprise Event.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="MessageID" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>Contains the Message ID from the SNIHeader of the Message. Maps to the Context ID in Enterprise Events.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ApplicationName" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>Combined Application Code and  Module Code eg: EbizHR.  Application Code Maps directly to the Application Name available in the Enterprise Events. Application Name also maps to earname in the ApplicationName</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ComponentName" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>Service Name eg: Business Process Name . Maps to component Name and class name entities in Enterprise Event</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="InstanceID" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>Instance ID of the Service eg: BPELInstance id . Maps to ThreadID in the Enterprise Event.  Must be all numeric, the type in Enterprise Events is Integer!!</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="UserID" type="xsd:string" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>When Available the Event will be logged under the specified used id. Maps to Create User Id in Enterprise Events. This field is supposed to contain logical user who creates the fault. eg: SOAUSER</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="hostname" type="xsd:string" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Maps to the hostname entity  in Enterprise Events</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="FaultContext" type="FaultContextType"/>
+
+<!-- =============  FaultNotification =========== -->
+	<xsd:complexType name="FaultNotificationType">
+		<xsd:sequence>
+			<xsd:element name="ReportDateTime" type="xsd:dateTime" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Used as the Created Date Time in the Enterprise Event. If left empty will be populated with the Current DateTime of the System</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="EventCode" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>Maps Directly to the Enterprise Event Code. See the "Event Code Naming Standards" in the wiki</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ShortDescription" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>Short Description about the Event Raised. Maps directly with the Short Description available in Enterprise Events</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="LongDescription" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>Long Description about the Event Raised. Maps directly with the Long Description available in Enterprise Events</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Severity" type="xsd:integer" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Maps to Severity in Events</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="FaultMessage" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="FaultNotification" type="FaultNotificationType"/>
+
+<!-- =============  FaultMessage =========== -->
+	<xsd:complexType name="FaultMessageType">
+		<xsd:sequence>
+			<xsd:element name="Code" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>Fault Code from the fault encountered in the Service.  Is concatenated as Code + Text + Stack and placed in Event Data in Enterprise Events</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Text" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>Fault Summary or Application Specific Fault Description. Is concatenated as Code + Text + Stack and placed in Event Data in Enterprise Events</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Stack" type="xsd:string" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Is concatenated as Code + Text + Stack and placed in Event Data in Enterprise Events</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="FaultMessage" type="FaultMessageType"/>
+</xsd:schema>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns="http://xmlns.schneider.com/EnterpriseObjects/Core/Common/V1"
+            targetNamespace="http://xmlns.schneider.com/EnterpriseObjects/Core/Common/V1"
+            elementFormDefault="qualified">
+ <xsd:element name="EnterpriseEvent" type="EnterpriseEventType">
+  <xsd:annotation>
+   <xsd:documentation>SNI Enterprise Event element</xsd:documentation>
+  </xsd:annotation>
+ </xsd:element>
+ <xsd:complexType name="EnterpriseEventType">
+  <xsd:sequence>
+   <xsd:element name="createDatetime" nillable="false" type="xsd:dateTime"/>
+   <xsd:element name="applicationName" nillable="false" type="xsd:string"/>
+   <xsd:element name="contextApplicationName" nillable="true"
+                type="xsd:string"/>
+   <xsd:element name="className" nillable="true" type="xsd:string"/>
+   <xsd:element name="componentName" nillable="false" type="xsd:string"/>
+   <xsd:element name="contextId" nillable="false" type="xsd:string"/>
+   <xsd:element name="earName" nillable="true" type="xsd:string"/>
+   <xsd:element name="applicationEventCode" nillable="false" type="xsd:string"/>
+   <xsd:element name="eventData" nillable="false" type="xsd:string"/>
+   <xsd:element name="hostName" nillable="false" type="xsd:string"/>
+   <xsd:element name="longDescription" nillable="true" type="xsd:string"/>
+   <xsd:element name="methodName" nillable="true" type="xsd:string"/>
+   <xsd:element name="serverName" nillable="true" type="xsd:string"/>
+   <xsd:element name="perceivedSeverity" type="xsd:short"/>
+   <xsd:element name="shortDescription" nillable="false" type="xsd:string"/>
+   <xsd:element name="threadId" type="xsd:int"/>
+   <xsd:element name="createUserId" nillable="false" type="xsd:string"/>
+   <xsd:element name="vendorName" nillable="true" type="xsd:string"/>
+   <xsd:element name="businessObjectType" nillable="true" type="xsd:string"/>
+   <xsd:element name="domainName" nillable="true" type="xsd:string"/>
+   <xsd:element name="clusterName" nillable="true" type="xsd:string"/>
+  </xsd:sequence>
+ </xsd:complexType>
+</xsd:schema>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns="http://xmlns.schneider.com/EnterpriseObjects/Core/Common/V1"
+            targetNamespace="http://xmlns.schneider.com/EnterpriseObjects/Core/Common/V1"
+            elementFormDefault="qualified" attributeFormDefault="unqualified"
+            version="1.00">
+                <xsd:complexType name="ResponseType">
+                                <xsd:sequence>
+                                                <xsd:element name="Success" type="xsd:boolean"/>
+                                </xsd:sequence>
+                </xsd:complexType>
+                <xsd:element name="Response" type="ResponseType"/>
+</xsd:schema>
+

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions name="SNIFault"
+             targetNamespace="http://xmlns.schneider.com/EnterpriseObjects/Core/Common/V1"
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+             xmlns:ns1="http://xmlns.schneider.com/EnterpriseObjects/Core/Common/V1"
+             xmlns="http://schemas.xmlsoap.org/wsdl/">
+ <types>
+             
+        <schema xmlns="http://www.w3.org/2001/XMLSchema" 
+             xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/">
+            <import namespace="http://xmlns.schneider.com/EnterpriseObjects/Core/Common/V1" schemaLocation="../../../EnterpriseObjectLibrary/Core/Common/V1/SNICore.xsd"/>
+        </schema>
+</types>
+
+
+    <message name="SNIFaultMessage">
+        <part name="SNIFault" element="ns1:SNIFault"/>        
+    </message>
+</definitions>

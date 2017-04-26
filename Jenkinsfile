@@ -30,7 +30,7 @@ pipeline {
     }
 	stage('PushArtifacts') {
       steps {
-		archiveArtifacts '*.jar'
+	archiveArtifacts '*.jar'
       }
     }
   }

@@ -24,9 +24,9 @@ pipeline {
 		[$class: 'ChoiceParameterDefinition', choices: 'DEV\nUAT\nPRD', description: 'Environment', name: 'env'],
 		[$class: 'TextParameterDefinition', defaultValue: 'ChangeID', description: 'Change Request ID', name: 'change']
 		])
+	 echo ("Env: "+selectedDetails['env'])
+	 echo ("ChangeID: "+selectedDetails['change'])  		 
 	 }
-	echo ("Env: "+selectedDetails['env'])
-	echo ("ChangeID: "+selectedDetails['change'])     
       }
     }
 	stage('Deploy') {

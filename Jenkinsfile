@@ -18,7 +18,7 @@ pipeline {
     }
 	stage('Approval') {
       steps {
-	String[] inputParams = ["DEV", "UAT", "PRD"]      
+	def inputParams = ["DEV", "UAT", "PRD"]      
         def userInput = input(
 			id: 'userInput', message: 'Let\'s promote?', parameters: [
 			[$class: 'ChoiceParameterDefinition', choices: inputParams, description: 'Environment', name: 'env'],

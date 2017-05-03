@@ -18,7 +18,7 @@ pipeline {
     }
 	stage('Approval') {
       steps {
-	     input(
+	     def selectedDetails = input(
 		id: 'userInput', message: 'Let\'s promote?', parameters: [
 		[$class: 'ChoiceParameterDefinition', choices: 'DEV\nUAT\nPRD', description: 'Environment', name: 'env'],
 		[$class: 'TextParameterDefinition', defaultValue: 'ChangeID', description: 'Change Request ID', name: 'change']

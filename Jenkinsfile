@@ -18,11 +18,15 @@ pipeline {
     }
 	stage('Approval') {
       steps {
+	 script {     
 	     def selectedDetails = input(
 		id: 'userInput', message: 'Let\'s promote?', parameters: [
 		[$class: 'ChoiceParameterDefinition', choices: 'DEV\nUAT\nPRD', description: 'Environment', name: 'env'],
 		[$class: 'TextParameterDefinition', defaultValue: 'ChangeID', description: 'Change Request ID', name: 'change']
 		])
+	 }
+	echo ("Env: "+selectedDetails['env'])
+	echo ("ChangeID: "+selectedDetails['change'])     
       }
     }
 	stage('Deploy') {

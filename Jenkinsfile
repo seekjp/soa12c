@@ -18,7 +18,13 @@ pipeline {
     }
 	stage('Approval') {
       steps {
-        input 'Good to go?'
+        input(
+			 id: 'userInput', message: 'Let\'s promote?', parameters: [
+			 [$class: 'TextParameterDefinition', defaultValue: 'Dev', description: 'Environment', name: 'env'],
+			 [$class: 'TextParameterDefinition', defaultValue: 'ChangeID', description: 'Change Request ID', name: 'change']
+			])
+			echo ("Env: "+userInput['env'])
+			echo ("ChangeID: "+userInput['change'])
       }
     }
 	stage('Deploy') {
@@ -30,7 +36,7 @@ pipeline {
     }
 	stage('PushArtifacts') {
       steps {
-	archiveArtifacts '**/target/*.jar'
+		archiveArtifacts '**/target/*.jar'
       }
     }
   }

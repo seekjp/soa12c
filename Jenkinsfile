@@ -18,13 +18,11 @@ pipeline {
     }
 	stage('Approval') {
       steps {
-	        def userInput = input(
-			id: 'userInput', message: 'Let\'s promote?', parameters: [
-			[$class: 'ChoiceParameterDefinition', choices: 'DEV\nUAT\nPRD', description: 'Environment', name: 'env'],
-			[$class: 'TextParameterDefinition', defaultValue: 'ChangeID', description: 'Change Request ID', name: 'change']
-			])
-	echo ("Env: "+userInput['env'])
-	echo ("ChangeID: "+userInput['change'])
+	     input(
+		id: 'userInput', message: 'Let\'s promote?', parameters: [
+		[$class: 'ChoiceParameterDefinition', choices: 'DEV\nUAT\nPRD', description: 'Environment', name: 'env'],
+		[$class: 'TextParameterDefinition', defaultValue: 'ChangeID', description: 'Change Request ID', name: 'change']
+		])
       }
     }
 	stage('Deploy') {

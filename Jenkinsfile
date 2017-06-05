@@ -39,7 +39,7 @@ pipeline {
     }
 	stage('PushArtifacts') {
       steps {
-		archiveArtifacts '**/target/*.jar', fingerprint: true
+		archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
       }
     }
   }

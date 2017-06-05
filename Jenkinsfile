@@ -38,7 +38,7 @@ pipeline {
     }
 	stage('PushArtifacts') {
       steps {
-		archiveArtifacts '**/target/*.jar'
+		archiveArtifacts '**/target/*.jar', fingerprint: true
       }
     }
   }

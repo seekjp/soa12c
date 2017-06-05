@@ -8,8 +8,8 @@ pipeline {
   stages {
     stage('Initialize') {
       steps {
-        bat 'echo "SOA 12c Deploy!"'
-	bat 'echo Running ${env.BUILD_ID} on ${env.JENKINS_URL}'
+        echo "SOA 12c Deploy!"
+	echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
       }
     }
     stage('SetMavenPath') {
